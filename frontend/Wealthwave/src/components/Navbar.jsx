@@ -5,22 +5,22 @@ import logo from "../assets/logo.jpg"
 
 const Navbar = () => {
   return (
-    <div className='app'>
-    <header>
+    <div className='app-update'>
+    <header className='app'>
       <div className='logo-box'>
-    <img className='logo' src={logo} alt="" />
+    <Link to="/"><img className='logo' src={logo} alt="" /></Link>
     </div>
         <nav className='Navbar'>
           <ul>
             <Link to="/">
             <li><span style={{color: "#FE0000"}}>HOME</span></li></Link>
-            <li>COURSES</li>
-            <li><span style={{color: "#FE0000"}}>ABOUT US</span></li>
-            <li>CONTACT US</li>
+            <a href="#courses"><li>COURSES</li></a>
+            <a href="#about_us"><li><span style={{color: "#FE0000"}}>ABOUT US</span></li></a>
+            <a href="#contact"><li>CONTACT US</li></a>
           </ul>
         </nav>
         <Link to="/login">
-     <button className='login-button'>Login</button></Link>
+     <button className='login-button-1'>Login</button></Link>
     </header>
 
 

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 const Wave = () => {
     
   return (
-    <main>
+    <main >
 
         <section className='wave'>
       <h5>  WEALTH <span>WAVE</span> </h5> 
@@ -21,6 +21,7 @@ const Wave = () => {
         <section className='background-image'>
             <img className='img' src={background} alt="" />
         </section>
+
 
     </main>
   )

@@ -32,9 +32,36 @@ const UserSchema = mongoose.Schema({
     country:{
         type: String,
         required: [true, "Please enter your Country"],
-    }
+    },
+    balance: { 
+        type: Number, 
+        default: 0 
+    },
+    profit: { 
+        type: Number, 
+        default: 0 
+    },
+    status: { 
+        type: String, 
+        enum: ['active', 'blocked'], 
+        default: 'active' },
+        
+        transactionHistory: [{
+            amount: Number,
+            date: { type: Date, default: Date.now },
+            type: { type: String, enum: ['deposit', 'withdrawal', 'profit'], required: true }
+        }],
+        investmentPlan: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'InvestmentPlan'
+        },
+        isAdmin: { 
+            type: String, 
+            default: "USER" 
+        },
+    
 },{
-    timestamp: true,
+    timestamps: true,
 })
 
 const User = mongoose.model("User", UserSchema);
