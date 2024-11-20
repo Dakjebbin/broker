@@ -1,8 +1,18 @@
 import React from 'react'
-
+import { useAuthContext } from "../context/auth-context";
 const Dashboard = () => {
+
+  const { userData } = useAuthContext();
   return (
-    <div>Dashboard</div>
+    <div>
+
+{userData && (
+        <div>
+          <h1>Welcome {userData?.name}</h1>
+        </div>
+      )}
+
+    </div>
   )
 }
 

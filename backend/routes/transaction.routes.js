@@ -5,7 +5,7 @@ import { deleteProfit, updateProfit } from '../controllers/transaction.controlle
 
 const router = express.Router();
 
-router.post("/fund", validateUsers, )
+
 router.post("/profits", validateUsers, rolevalidation, updateProfit)
 router.delete("/profits", validateUsers, rolevalidation, deleteProfit)
 

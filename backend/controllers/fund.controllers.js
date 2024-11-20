@@ -29,6 +29,8 @@ const fundUser = await fundModel.findOneAndUpdate({
     
 })
 
+
+
 parseInt(fundUser.amount += Number(amount));
         await fundUser.save();
 
@@ -49,7 +51,8 @@ parseInt(fundUser.amount += Number(amount));
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Internal server error"
+            message: "Internal server error",
+            error: error
         })
     }
 }

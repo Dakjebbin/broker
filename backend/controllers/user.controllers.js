@@ -136,17 +136,17 @@ const login = async (req, res) => {
         });       
 
         res.cookie("access_Token", accessToken, {
-           // httpOnly: true,
-            // secure: true,
+            httpOnly: true,
+            secure: true,
             sameSite:"none",
             maxAge: 40 * 1000,
         })
 
         res.cookie("refresh_Token", refreshToken, {
-           // httpOnly: true,
-            // secure: true,
+           httpOnly: true,
+            secure: true,
             sameSite:"none",
-            maxAge:1 * 24 * 60 * 60 * 1000,
+            maxAge: 2 * 60 * 60 * 1000,
         })
 
           res.status(200).json({

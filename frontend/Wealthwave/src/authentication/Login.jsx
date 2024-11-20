@@ -4,7 +4,7 @@ import { image_2 } from '../assets/assest'
 import eye from "../assets/eye.svg"
 import eyeOff from "../assets/eye-off.svg"
 import mail from "../assets/mail.svg"
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from "axios"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -41,8 +41,7 @@ axios.defaults.withCredentials = true;
 
     setEmail('')
     setPassword('')
-
-    Navigate("/dashboard")
+    window.location.assign("/dashboard");
 
     
    })
@@ -50,7 +49,7 @@ axios.defaults.withCredentials = true;
      if (error instanceof axios.AxiosError) {
       console.log('');
     } if(error === 404 || error) {
-      const errorMessage =  "Invalid Credentials"  
+      const errorMessage =  error.message 
       toast.error(errorMessage)
       
     }

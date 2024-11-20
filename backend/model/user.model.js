@@ -34,14 +34,14 @@ const UserSchema = mongoose.Schema({
     //     type: String,
     //     required: [true, "Please enter your Country"],
     // },
-    balance: { 
-        type: Number, 
-        default: 0 
-    },
-    profit: { 
-        type: Number, 
-        default: 0 
-    },
+    // balance: { 
+    //     type: Number, 
+    //     default: 0 
+    // },
+    // profit: { 
+    //     type: Number, 
+    //     default: 0 
+    // },
     status: { 
         type: String, 
         enum: ['active', 'blocked'], 
