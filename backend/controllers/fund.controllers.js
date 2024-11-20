@@ -22,13 +22,15 @@ const fundData = async (req, res) => {
                 });
             }
 
-const fundUser = await fundModel.create({
+const fundUser = await fundModel.findOneAndUpdate({
     email:  validUser.email,
     amount,
     plan,
     
 })
 
+parseInt(fundUser.amount += Number(amount));
+        await fundUser.save();
 
     if (fundUser) {
         res.status(201).json({
