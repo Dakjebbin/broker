@@ -8,7 +8,8 @@ const Dashboard = () => {
 
 {userData && (
         <div>
-          <h1>Welcome {userData?.name}</h1>
+          <h1>Welcome {userData?.username}</h1>
+         
         </div>
       )}
 
