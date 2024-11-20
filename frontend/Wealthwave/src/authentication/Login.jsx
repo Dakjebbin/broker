@@ -4,11 +4,61 @@ import { image_2 } from '../assets/assest'
 import eye from "../assets/eye.svg"
 import eyeOff from "../assets/eye-off.svg"
 import mail from "../assets/mail.svg"
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
+import axios from "axios"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Login = () => {
 
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const Navigate = useNavigate()
+
+  const baseUrl = import.meta.env.VITE_BASEURL
+//axios with credentials
+axios.defaults.withCredentials = true;
+  const handleSubmit = (e) => {
+      e.preventDefault();
+
+      if (!email || !password) {
+        alert('Please all fields are required')
+        return;
+  }
+
+  axios.post(`${baseUrl}/auth/login`, {
+    email,
+    password
+  }).then((response) => {
+    
+    if (response.data.success === true) {
+      //alert('Login Successful')
+      toast.success("Logged In Successfully")
+    } 
+
+    setEmail('')
+    setPassword('')
+
+    Navigate("/dashboard")
+
+    
+   })
+  .catch((error) => {
+     if (error instanceof axios.AxiosError) {
+      console.log('');
+    } if(error === 404 || error) {
+      const errorMessage =  "Invalid Credentials"  
+      toast.error(errorMessage)
+      
+    }
+  
+  })
+}
+
+
   return (
     <div style={{marginTop:"60px"}}>
       <div className='login-container'>
@@ -16,7 +66,7 @@ const Login = () => {
           <div>
       <h3 className='welcome'>Welcome <span style={{color:"black"}}>Back</span></h3>
       <p className='welcome-2'>Please Enter Your Details</p>
-      <form>
+      <form onSubmit={handleSubmit}>
 
         <button className='gmail'>Log in with Gmail</button>
 
@@ -31,9 +81,10 @@ const Login = () => {
         type="email" 
         placeholder='Email'
         required 
-        name="" 
+        value={email}
+        onChange={(e) => setEmail (e.target.value)}
         className="password-input-box"
-        id="" />
+        id="email" />
 
         <div className='absolut'>
           <img src={mail} alt="" />
@@ -47,6 +98,8 @@ const Login = () => {
                     id="password"
                     required
                     placeholder='Password'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className="password-input-box"
                   />
                   <div className="eye-button" onClick={() => setShowPassword(!showPassword)}
@@ -71,6 +124,7 @@ const Login = () => {
         <img className='loginImage' src={image_2} alt="" />
       </div>
       </div>
+      <ToastContainer />
     </div>
   )
 }

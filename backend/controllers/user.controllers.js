@@ -7,9 +7,9 @@ const register = async (req, res) => {
    
    try {
     const register = req.body;
-    const {fullname, username, Dateofbirth, email, password, phonenumber,country} = register;
+    const {fullname, username, email, phonenumber, password} = register;
     
-    if (!fullname || !username || !Dateofbirth || !email || !password || !phonenumber || !country) {
+    if (!fullname || !username  || !email || !phonenumber || !password) {
         res.status(404).json({
             success: false,
             message: "Please provide all fields"
@@ -18,7 +18,7 @@ const register = async (req, res) => {
     }
 
     //check if email/username exists
-    const emailExists = await User.findOne({ email: email}).exec();
+    const emailExists = await User.findOne({ email}).exec();
     const userNameExists = await User.findOne({ username }).exec();
     const phoneNumberExists = await User.findOne({ phonenumber }).exec();
 
@@ -54,18 +54,18 @@ const register = async (req, res) => {
     const newUser = await User.create({
         fullname,
         username,
-        Dateofbirth,
         email,
-        password: encrypted,
         phonenumber,
-        country, 
+        password: encrypted,
+       
+       
     });
 
     if (newUser) {
         res.status(201).json({
             success:true,
             message: "created Successfully",
-            user: newUser
+           // user: newUser
         })
     } else {
         res.status(400).json({
@@ -216,4 +216,24 @@ const userDetail = async (req, res) => {
     }
 }
 
-export {register, login, userDetails, userDetail} 
+
+const validate = async (req, res) => {
+
+const validuser = req.user;
+
+    
+  if (validuser) {
+    res.status(200).json({
+      success: true,
+      message: "User valid",
+      user: validuser,
+    });
+  } else {
+    res.status(403).json({
+      success: false,
+      message: "Session expired",
+    });
+  }
+}
+
+export {register, login, userDetails, userDetail, validate} 

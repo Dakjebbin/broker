@@ -24,6 +24,9 @@ font-weight: 700;
 line-height: 21.33px;
 }
 
+.checkbox{
+  text-align: center;
+}
 
 .eye-button {
     background: transparent;
@@ -98,7 +101,7 @@ line-height: 21.33px;
 font-size: 16px;
 font-weight: 700;
 line-height: 21.33px;
-text-align: left;
+text-align: center;
 padding-bottom: 30px;
 
   }
@@ -160,6 +163,7 @@ text-align: left;
     border-radius: 30px;
     background: #FE0000;
     outline: none;
+    cursor: p;
     margin-top: 30px;
     font-family: "Playfair Display", serif;
     border: 5px solid #ECE8E8AD;

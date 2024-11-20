@@ -22,10 +22,8 @@ const transactionSchema = mongoose.Schema({
   status: { type: String, 
     enum: ['pending', 'completed', 'failed'], 
     default: 'pending' },
-  timestamp: { 
-    type: Date, 
-    default: Date.now 
-}
+}, {
+  timestamps: true
 })
 
 const Transaction = mongoose.model('Transaction', transactionSchema);

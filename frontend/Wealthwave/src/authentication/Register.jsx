@@ -5,11 +5,82 @@ import eye from "../assets/eye.svg"
 import eyeOff from "../assets/eye-off.svg"
 import mail from "../assets/mail.svg"
 import call from "../assets/cal.svg"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from "axios"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Register = () => {
 
   const [showPassword, setShowPassword] = useState(false);
+  const [fullname, setFullName] = useState("");
+  const [username, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+  //const [confirmpassword, setConfirmPassword] = useState("");
+
+  const Navigate = useNavigate()
+
+  const baseUrl = import.meta.env.VITE_BASEURL
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!fullname || !username || !email || !phoneNumber || !password) {
+      toast.error("All fields are required.");
+        return
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      toast.error("Invalid email format.");
+      return;
+    }
+
+    axios.post(`${baseUrl}/auth/register`, {
+      fullname,
+      username,
+      email,
+      phonenumber: phoneNumber,
+      password
+    }).then((response) => {
+
+      console.log(response);
+
+      if(response.data.success === true) {
+          toast.success("Registration successful", {
+            position: "top-center"
+          })
+      } else if(response.data.success === false) {
+        toast.error("Registration failed: " + (response.error || 'Unknown error'));
+      }
+      
+        
+      setFullName('')
+      setUserName('')
+      setEmail('')
+      setPhoneNumber('')
+      setPassword('')
+        
+      Navigate("/login")
+        
+    }). catch((error) => {
+      if (error instanceof axios.AxiosError) {
+        console.log(
+          "the register error from axios => ",
+          error?.response?.data
+        );
+      } else {
+        console.log("reg error => ", error);
+      }
+    
+    })
+    
+
+  }
+
+
   return (
     <div style={{marginTop:"60px"}}>
       <div className='login-container'>
@@ -17,13 +88,19 @@ const Register = () => {
           <div>
       <h3 className='welcome'>Welcome</h3>
       <p className='welcome-2'>Please Enter Your Details</p>
-      <form>
+      
+      <form onSubmit={handleSubmit}>
 
       <input type="text"
-        placeholder='Name'
+        placeholder='Full Name'
         required
         className='password-input-box'
+        value={fullname}
+        onChange={(e) => setFullName(e.target.value)}
+       
+        
       />
+    
       <br />
       <br />
 <div>
@@ -32,6 +109,8 @@ const Register = () => {
       placeholder='Username'
       required
       className='password-input-box'
+      value={username}
+      onChange={(e) => setUserName(e.target.value)}
       />
 </div>
       
@@ -40,10 +119,12 @@ const Register = () => {
         <input 
         type="email" 
         placeholder='Email'
+        id="email"
         required 
-        name="" 
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         className="password-input-box"
-        id="" />
+        />
 
         <div className='absolut'>
           <img src={mail} alt="" />
@@ -57,9 +138,10 @@ const Register = () => {
         type="number" 
         placeholder='Phone Number'
         required 
-        name="" 
+        value={phoneNumber}
+        onChange={(e) => setPhoneNumber(e.target.value)}
         className="password-input-box"
-        id="" />
+        id="phonenumber" />
 
         <div className='absolut'>
           <img src={call} alt="" />
@@ -76,6 +158,8 @@ const Register = () => {
                     required
                     placeholder='Password'
                     className="password-input-box"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                   <div className="eye-button" onClick={() => setShowPassword(!showPassword)}
                     aria-label={showPassword ? "Hide password" : "Show password"}>
@@ -84,14 +168,22 @@ const Register = () => {
                 </div>
               </div>
 
-        <Link to="/login">
-        Already Have an account?
-        </Link>
+
+              <div className='checkbox'>
+        <input type="checkbox" name="" id="" required />
+        <span style={{marginLeft:"10px"}}>I have Agreed to the <a href="" style={{color:"blue"}}>Terms & Conditions</a></span>
+        </div>
+     
+      
 <div>
         <button className='login-button'>Sign Up</button>
         </div>
       </form>
-      
+
+        <div style={{textAlign:"center", marginTop:"15px"}}>
+           <span>  Already Have an account?</span> <Link to="/login" style={{color:"blue"}}>Sign In</Link>
+      </div>
+
       </div>
       </div>
 
@@ -99,6 +191,7 @@ const Register = () => {
         <img className='loginImage' src={image_2} alt="" />
       </div>
       </div>
+      <ToastContainer />
     </div>
   )
 }

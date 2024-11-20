@@ -2,8 +2,10 @@ import express from 'express';
 import dotenv from "dotenv";
 import mongoose from 'mongoose';
 import authRoutes from "./routes/user.routes.js"
-import fundRoutes from "./routes/transaction.routes.js"
+import transactionRoutes from "./routes/transaction.routes.js"
+import fundRoutes from "./routes/fund.routes.js"
 import cookieParser from 'cookie-parser';
+import cors from "cors"
 
 dotenv.config();
 
@@ -14,8 +16,15 @@ const db = process.env.MONGODB_LINK
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+   
+}))
 app.use("/auth", authRoutes)
-app.use("/transactions", fundRoutes )
+app.use("/transactions", transactionRoutes )
+app.use("/userFund", fundRoutes)
+
 
 app.get("/", (req, res) => {
         res.send("API WORKING");

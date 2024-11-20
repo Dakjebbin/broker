@@ -6,6 +6,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from './layouts/layout.jsx'
 import Login from './authentication/Login.jsx'
 import Register from './authentication/Register.jsx'
+import Dashboard from './components/Dashboard.jsx'
+import { AuthContextProvider } from './context/auth-context.jsx'
 
 const router = createBrowserRouter([
   {
@@ -17,17 +19,19 @@ const router = createBrowserRouter([
         element: <App/>
       },
       {
-        path: "/login",
+        path: "login",
         element: <Login/>
       },
       {
-        path: "/register",
+        path: "register",
         element: <Register/>,
-        
       },
-    ]
+    ],
   },
- 
+ {
+  path: "/dashboard",
+  element: <Dashboard/>
+ }
 
   
 ])
@@ -35,6 +39,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <AuthContextProvider>
    <RouterProvider router={router} future={{ v7_startTransition: true }} />
+   </AuthContextProvider>
   </StrictMode>,
 )
