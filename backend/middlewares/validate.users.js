@@ -5,7 +5,6 @@ export const validateUsers = async (req, res, next) => {
     const accesstoken = req.cookies.access_Token;
     const refreshtoken = req.cookies.refresh_Token;
 
-    console.log("the token i set",{accesstoken, refreshtoken});
     // Implement your token validation logic here
 
     if(!accesstoken) {
@@ -31,7 +30,7 @@ export const validateUsers = async (req, res, next) => {
                         });
                         return;
                     }
-                    console.log("the valid user => ", validuser);
+                   
                     const accesstoken = jwt.sign({
                         blood: validuser?._id
                     },

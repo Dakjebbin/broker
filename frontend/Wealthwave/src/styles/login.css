@@ -155,23 +155,25 @@ text-align: left;
     border-radius: 30px;
 }
 
+
 .login-button{
-    
-    width: 300px;  /* Takes full width of its container */
+    width: 300px;  
     padding: 10px 15px;
     border: 5px;
     border-radius: 30px;
     background: #FE0000;
     outline: none;
-    cursor: p;
+    cursor: pointer;
     margin-top: 30px;
     font-family: "Playfair Display", serif;
     border: 5px solid #ECE8E8AD;
-font-size: 24px;
-font-weight: 700;
-line-height: 31.99px;
-color: #FFFFFF;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 31.99px;
+    color: #FFFFFF;
+}
 
-
-    
+.spiner-button{
+  position: relative;
+  
 }

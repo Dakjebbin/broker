@@ -1,6 +1,6 @@
 export const rolevalidation = async (req, res, next) => {
     const validatedUser = req.user;
-    console.log("data from role middleware => ", validatedUser);
+  
     if (validatedUser?.isAdmin === "ADMIN") {
       next();
     } else {

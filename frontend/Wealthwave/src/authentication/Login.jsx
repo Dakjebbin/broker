@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react' // eslint-disable-line
 import "../styles/login.css"
 import { image_2 } from '../assets/assest'
 import eye from "../assets/eye.svg"
 import eyeOff from "../assets/eye-off.svg"
 import mail from "../assets/mail.svg"
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from "axios"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const Login = () => {
@@ -16,7 +17,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const Navigate = useNavigate()
+ // const Navigate = useNavigate()
 
   const baseUrl = import.meta.env.VITE_BASEURL
 //axios with credentials
@@ -35,29 +36,21 @@ axios.defaults.withCredentials = true;
   }).then((response) => {
     
     if (response.data.success === true) {
-      //alert('Login Successful')
-      toast.success("Logged In Successfully")
+      toast.success(response?.data?.message)
     } 
-
     setEmail('')
     setPassword('')
     window.location.assign("/dashboard");
-
-    
    })
   .catch((error) => {
      if (error instanceof axios.AxiosError) {
-      console.log('');
+      //console.log('');
     } if(error === 404 || error) {
       const errorMessage =  error.message 
-      toast.error(errorMessage)
-      
-    }
-  
+      toast.error(errorMessage) 
+    } 
   })
 }
-
-
   return (
     <div style={{marginTop:"60px"}}>
       <div className='login-container'>
@@ -67,13 +60,8 @@ axios.defaults.withCredentials = true;
       <p className='welcome-2'>Please Enter Your Details</p>
       <form onSubmit={handleSubmit}>
 
-        <button className='gmail'>Log in with Gmail</button>
 
-        <div className='line-container'>
-          <hr className='line'/>
-          <span className='or-text'>Or</span>
-          <hr className='line'/>
-        </div>
+        
       
       <div className='email-container'>
         <input 
@@ -111,9 +99,7 @@ axios.defaults.withCredentials = true;
         <a className='forgot' href="#forgot">Forgotten Password?</a>
         <Link to="/register">Not Registered?</Link>
         </div>
-<div>
-        <button className='login-button'>Log in</button>
-        </div>
+        <button type='submit' className='login-button'>Log in</button>
       </form>
       
       </div>

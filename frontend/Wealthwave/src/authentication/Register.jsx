@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react' //eslint-disable-line
 import "../styles/login.css"
 import { image_2 } from '../assets/assest'
 import eye from "../assets/eye.svg"
@@ -46,8 +46,6 @@ const Register = () => {
       password
     }).then((response) => {
 
-      console.log(response);
-
       if(response.data.success === true) {
           toast.success("Registration successful", {
             position: "top-center"
@@ -67,12 +65,12 @@ const Register = () => {
         
     }). catch((error) => {
       if (error instanceof axios.AxiosError) {
-        console.log(
+       toast.error(
           "the register error from axios => ",
           error?.response?.data
         );
       } else {
-        console.log("reg error => ", error);
+        toast.error("reg error => ", error);
       }
     
     })
@@ -171,7 +169,7 @@ const Register = () => {
 
               <div className='checkbox'>
         <input type="checkbox" name="" id="" required />
-        <span style={{marginLeft:"10px"}}>I have Agreed to the <a href="" style={{color:"blue"}}>Terms & Conditions</a></span>
+        <span style={{marginLeft:"10px"}}>I have Agreed to the <a href="/terms" style={{color:"blue"}}>Terms & Conditions</a></span>
         </div>
      
       

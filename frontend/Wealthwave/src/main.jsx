@@ -8,6 +8,9 @@ import Login from './authentication/Login.jsx'
 import Register from './authentication/Register.jsx'
 import Dashboard from './components/Dashboard.jsx'
 import { AuthContextProvider } from './context/auth-context.jsx'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import TermsConditions from './components/Terms.jsx'
 
 const router = createBrowserRouter([
   {
@@ -26,6 +29,10 @@ const router = createBrowserRouter([
         path: "register",
         element: <Register/>,
       },
+      {
+        path: "terms",
+        element: <TermsConditions/>,
+      },
     ],
   },
  {
@@ -41,6 +48,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthContextProvider>
    <RouterProvider router={router} />
+   <ToastContainer />
     </AuthContextProvider>
   </StrictMode>,
 )

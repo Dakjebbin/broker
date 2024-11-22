@@ -1,13 +1,13 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(); //eslint-disable-line
 
-export const useAuthContext = () => {
+export const useAuthContext = () => {        //eslint-disable-line
   return useContext(AuthContext);
 };
 
-export const AuthContextProvider = ({ children }) => {
+export const AuthContextProvider = ({ children }) => {    //eslint-disable-line
     const baseUrl = import.meta.env.VITE_BASEURL
    const [userData, setUserData] = useState(null);
 
@@ -19,7 +19,6 @@ export const AuthContextProvider = ({ children }) => {
             })
             
             if (!response?.data || !response?.data?.success) {
-                console.log("session ended");
                 return;
               }
 
@@ -38,7 +37,7 @@ export const AuthContextProvider = ({ children }) => {
     }
 
     validResponse();
-   }, []);
+   }, []);  //eslint-disable-line
 
     return(
         <AuthContext.Provider value={{userData}}>
