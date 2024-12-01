@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react' //eslint-disable-line
 import { useAuthContext } from "../context/auth-context";
-import { toast } from 'react-toastify';
+//import { toast } from 'react-toastify';
+import Layout from '../layouts/sidebar-layout'
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+
 //import { useParams } from "react-router-dom";
 import axios from 'axios';
 const Dashboard = () => {
@@ -40,39 +43,46 @@ console.log("the state variable",transaction);
   }, [userData]);
 
 
-  const handleLogout = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await axios.post(`${baseUrl}/auth/logout`,
-        {
-        withCredentials:true
-        }
-    )
+  // const handleLogout = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await axios.post(`${baseUrl}/auth/logout`,
+  //       {
+  //       withCredentials:true
+  //       }
+  //   )
 
-    if (response?.data.success) {
-      toast.success(response?.data?.message);
-      window.location.assign("/login");
-    }
+  //   if (response?.data.success) {
+  //     toast.success(response?.data?.message);
+  //     window.location.assign("/login");
+  //   }
       
-    } catch (error) { 
-      if (error instanceof axios.AxiosError) {
-        console.log('');
-      } if(error === 404 || error) {
-        const errorMessage =  error.message 
-        toast.error(errorMessage)  
-      }
-    }
+  //   } catch (error) { 
+  //     if (error instanceof axios.AxiosError) {
+  //       console.log('');
+  //     } if(error === 404 || error) {
+  //       const errorMessage =  error.message 
+  //       toast.error(errorMessage)  
+  //     }
+  //   }
     
-  }
+  // }
 
 
 
   return (
     <div>
-
+  <Layout >
 {userData && (
         <div>
-          <h1>Welcome {userData?.username}</h1>
+          <div className='absolute right-0 flex items-center'>
+          <span >Welcome {userData?.username}</span>
+          <Avatar>
+  <AvatarImage src="https://github.com/shadcn.png" />
+  <AvatarFallback>CN</AvatarFallback>
+</Avatar>
+          </div>
+        
 
           {userData.status === "blocked" ? (
   <span>Error Occurred. Please Contact Admin</span>
@@ -82,10 +92,10 @@ console.log("the state variable",transaction);
          
 
          
-          <button onClick={handleLogout} className='bg-red-700 border-solid border-2'>
+          {/* <button onClick={handleLogout} className='bg-red-700 border-solid border-2'>
             Log Out
           </button>
-        
+         */}
 
          <div>
           <h2>Transaction History</h2>
@@ -94,19 +104,19 @@ console.log("the state variable",transaction);
                   ) : (
             <ul>
               {transaction.map((transactions, index) => {
-               return( <li key={index} className='grid grid-cols-3 '>
-                    <p>Amount:
+               return( <div key={index} className='grid grid-cols-3 '>
+                    <div>Amount:
                       <p> ${transactions.amount}
                       </p>
-                      </p>
-                    <p>Status: 
+                      </div>
+                    <div>Status: 
                       <p>{transactions.status}
                       </p>
-                      </p>
-                    <p>Type: <p> {transactions.type}
+                      </div>
+                    <div>Type: <p> {transactions.type}
                     </p>
-                    </p>
-                </li>
+                    </div>
+                </div>
 
                )
               })}
@@ -117,7 +127,7 @@ console.log("the state variable",transaction);
 
         </div>
       )}
-
+</Layout>
     </div>
   )
 }

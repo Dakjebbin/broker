@@ -8,7 +8,7 @@ const Wave = () => {
   return (
     <main >
 
-        <section className='wave'>
+        <section className='wave' id='home'>
       <h5>  WEALTH <span>WAVE</span> </h5> 
 <h4>DIGITAL ONLINE AFFILIATE AGENCY</h4>
 <p>We provide high-quality affiliate and digital marketing courses.</p>
