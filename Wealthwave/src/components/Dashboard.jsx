@@ -28,7 +28,7 @@ console.log("the state variable",transaction);
           withCredentials:true
         })
         console.log(response);
-        setTransaction(response.data.transactions)
+        setTransaction(response.data.data)
       } catch (error) {
         if (error instanceof axios.AxiosError) {
           console.log("No session => ", error?.response?.data);

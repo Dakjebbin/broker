@@ -1,5 +1,4 @@
 import axios from "axios";
-import PropTypes from 'prop-types';
 import { createContext, useContext, useEffect, useState } from "react";
 import { AlertCircle } from "lucide-react"
 import {
@@ -72,9 +71,6 @@ const AuthContextProvider = ({ children }) => {
         </AuthContext.Provider>
     );
     
-};
-AuthContextProvider.propTypes = {
-  children: PropTypes.node.isRequired,  
 };
 
 

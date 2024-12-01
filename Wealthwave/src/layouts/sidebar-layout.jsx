@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 
@@ -14,6 +14,6 @@ export default function Layout({ children }) {
   );
 }
 
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,  
-};
+// Layout.propTypes = {
+//   children: PropTypes.node.isRequired,  
+// };
