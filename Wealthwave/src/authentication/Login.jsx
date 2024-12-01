@@ -44,7 +44,7 @@ axios.defaults.withCredentials = true;
    })
   .catch((error) => {
      if (error instanceof axios.AxiosError) {
-      //console.log('');
+      console.log(error,'error message');
     } if(error === 404 || error) {
       const errorMessage =  error.message 
       toast.error(errorMessage) 
